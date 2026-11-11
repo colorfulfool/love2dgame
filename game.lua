@@ -248,7 +248,8 @@ local function drawDomeHouse(imageData, size, mask, x, baselineY, width, wallHei
   fillMaskedCircle(imageData, size, mask, centerX, wallTop, roofRadius - stroke, CITY_PAPER)
 
   -- Little finial on top.
-  fillMaskedRect(imageData, size, mask, centerX - stroke / 2, wallTop - roofRadius - stroke * 2, stroke, stroke * 3, CITY_INK)
+  fillMaskedRect(imageData, size, mask, centerX - stroke / 2, wallTop - roofRadius - stroke * 2, stroke, stroke * 3,
+    CITY_INK)
 
   -- Visible sides of the front wall.
   fillMaskedRect(imageData, size, mask, x + stroke, wallTop + stroke, width - stroke * 2, wallHeight - stroke, CITY_PAPER)
@@ -345,7 +346,7 @@ local function paintCityWall(imageData, size, isLand, cityAmount, distance, pixe
 
         -- Crenellations (merlons) poking out of the city side of the wall.
         if d > wallDepth and d <= wallDepth + MERLON_DEPTH
-          and (along % MERLON_SPACING) < MERLON_WIDTH then
+            and (along % MERLON_SPACING) < MERLON_WIDTH then
           imageData:setPixel(px, py, CITY_INK[1], CITY_INK[2], CITY_INK[3], 1)
         end
       end
@@ -378,13 +379,13 @@ local function paintCityBuildings(imageData, size, isCity, canBuild, centerX, ce
       local topY = math.floor(roofTop)
 
       local inside = cellX >= 0 and cellX < size and topY >= 0 and topY < size
-        and isCity[topY][cellX]
-        and canBuild[math.floor(baselineY)][cellX]
+          and isCity[topY][cellX]
+          and canBuild[math.floor(baselineY)][cellX]
 
       if inside then
         if not mosqueDrawn and centerX and centerY
-          and math.abs(cellX - centerX) < spacingX
-          and math.abs(baselineY - centerY) < rowSpacing then
+            and math.abs(cellX - centerX) < spacingX
+            and math.abs(baselineY - centerY) < rowSpacing then
           mosqueDrawn = true
           drawMosque(imageData, size, canBuild, cellX, baselineY, stroke)
         else
@@ -566,8 +567,8 @@ local function buildMapImage(size)
 
         -- Off-white ground under the city, kept away from the shoreline.
         local cityTint = smoothstep(0.25, 0.65, cityAmount[py][px])
-          * smoothstep(0.02, 0.12, distanceInTiles)
-          * 0.95
+            * smoothstep(0.02, 0.12, distanceInTiles)
+            * 0.95
 
         r = mix(r, CITY_PAPER[1], cityTint)
         g = mix(g, CITY_PAPER[2], cityTint)
@@ -674,7 +675,7 @@ function game.draw()
   local fieldHeight = #tiles
   local fieldWidth = #tiles[1]
 
-  screenWidth, screenHeight = love.graphics.getDimensions()
+  local screenWidth, screenHeight = love.graphics.getDimensions()
 
   local tileWidth = screenWidth / fieldWidth
   local tileHeight = screenHeight / fieldHeight
